@@ -109,7 +109,7 @@ class AlumnoController extends Controller
         $kardex = array(
             'aprobadas'=>intval($datos->aprobadas),
             'reprobadas'=>intval($datos->reprobadas),
-            'promedio'=>round(floatval($datos->promedio),2),
+            'promedio'=>$datos->promedio,
             'creditos'=>intval($datos->creditos),
             'porcentaje'=>round(intval($datos->creditos)/$carrera->creditosMinimos*100,2),
             'alumno'=>$alumno,
