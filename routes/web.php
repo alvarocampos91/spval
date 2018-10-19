@@ -29,6 +29,7 @@ Route::get('kardex','AlumnoController@kardex');
 
 Route::get('aprobadas','AlumnoController@aprobadas');
 Route::get('asignaturasCarrera','CarreraController@asignaturas');
+Route::get('validarUsuario','UsuarioController@validar');
 
 Route::get('/img/{idImg}', function ($idImg) {
 	$archivo = Archivo::find($idImg);

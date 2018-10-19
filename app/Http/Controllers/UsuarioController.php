@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Usuario;
+use App\User;
 use Illuminate\Http\Request;
 
 class UsuarioController extends Controller
@@ -47,9 +48,9 @@ class UsuarioController extends Controller
      * @param  \App\Usuario  $usuario
      * @return \Illuminate\Http\Response
      */
-    public function show(Usuario $usuario)
+    public function show(User $usuario)
     {
-        return $usuario;
+        return Usuario::find($usuario->name);
     }
 
     /**
@@ -88,5 +89,10 @@ class UsuarioController extends Controller
         $usuario->delete();
 
         return response()->json($usuario, 200);
+    }
+
+    public function validar(Request $request)
+    {
+        return Usuario::validarUsuario($request->input('usuario'),$request->input('contrasena'));
     }
 }
