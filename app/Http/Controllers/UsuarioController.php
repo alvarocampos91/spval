@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Usuario;
 use App\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class UsuarioController extends Controller
@@ -50,7 +51,9 @@ class UsuarioController extends Controller
      */
     public function show(User $usuario)
     {
-        return Usuario::find($usuario->name);
+        return response()->json(DB::table('usuario')->select(DB::raw('users.id, usuario.matricula AS nombreUsuario, usuario.tipo AS tipoUsuario, usuario.img_perfil AS idImagenPerfil'))->
+            join('users','users.name','=','usuario.matricula')->
+            where('users.id','=',$usuario->id)->first());
     }
 
     /**

@@ -55,7 +55,9 @@ class ProfesorController extends Controller
      */
     public function show($profesor)
     {
-        return Profesor::find($profesor);
+        return response()->json(DB::table('usuario')->select(DB::raw('usuario.matricula AS DNI, usuario.nombre, usuario.a_paterno AS apellidoPaterno, usuario.a_materno AS apellidoMaterno, users.email AS correo, usuario.img_perfil AS idImagenPerfil'))->
+            join('users','users.name','=','usuario.matricula')->
+            where('usuario.matricula','=',$profesor)->first());
     }
 
     /**
