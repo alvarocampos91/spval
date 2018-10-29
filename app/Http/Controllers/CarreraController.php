@@ -11,7 +11,10 @@ class CarreraController extends Controller
     public function asignaturas(Request $request)
     {
         $result = array();
-        $id = $request->input('id_carrera');
+        $matricula = $request->input('matricula');
+        $id = DB::table('grupo')->select(DB::raw('grupo.fk_carrera'))->
+            join('alumno','alumno.seccion','=','grupo.seccion')->
+            where('alumno.matricula','=',$matricula)->first()->fk_carrera;
         $asignaturas = DB::table('carrera_has_asignatura')
         ->select(DB::raw('asignatura.*,carrera_has_asignatura.tipo'))
         ->join('asignatura','asignatura.codigo','=','carrera_has_asignatura.fk_asignatura')

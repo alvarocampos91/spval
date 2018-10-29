@@ -31,7 +31,7 @@ Route::get('aprobadas','AlumnoController@aprobadas');
 Route::get('asignaturasCarrera','CarreraController@asignaturas');
 Route::get('validarUsuario','UsuarioController@validar');
 
-Route::get('/img/{idImg}', function ($idImg) {
+Route::get('/imgPerfil/{idImg}', function ($idImg) {
 	$archivo = Archivo::find($idImg);
 	$pic = Image::make($archivo->dato);
     $response = Response::make($pic->encode('png'));

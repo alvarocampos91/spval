@@ -87,8 +87,11 @@ class AlumnoController extends Controller
 
     public function kardex(Request $request)
     {
-        $alumno = DB::table('alumno')->select(DB::raw(''))
-        ->join('grupo','grupo.seccion','=','alumno.seccion');
+        $alumno = DB::table('alumno')->select(DB::raw('usuario.*,grupo.*'))
+        ->join('grupo','grupo.seccion','=','alumno.seccion')
+        ->join('usuario','usuario.matricula','=','alumno.matricula')
+        ->where('alumno.matricula','=',$request->input('_id'))
+        ->first();
         Alumno::find($request->input('_id'));
         $carrera = Carrera::find(1);
         $materias = DB::table('curso')
