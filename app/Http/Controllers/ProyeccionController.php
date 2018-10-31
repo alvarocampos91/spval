@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Proyeccion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProyeccionController extends Controller
 {
@@ -15,8 +16,12 @@ class ProyeccionController extends Controller
     public function index(Request $request)
     {
         $matricula = $request->input('matricula');
-        
-        return Proyeccion::delAlumno($matricula)->get();
+        $proyeccion =  DB::table('proyeccion')->where('proyeccion.fk_alumno','=',$matricula)->orderBy('proyeccion.f_creacion', 'asc')->first();
+        return DB::table('proyeccion')->select(DB::raw('proyeccion.f_creacion, proyeccion.es_editada, asignatura.codigo, asignatura.nombre, asignatura.nombre_corto, periodo.nombre'))->
+        join('proyeccion_has_asignatura','proyeccion_has_asignatura.fk_proyeccion','=','proyeccion.id_proyeccion')->
+        join('periodo','proyeccion_has_asignatura.fk_periodo','=','periodo.id_periodo')->
+        join('asignatura','proyeccion_has_asignatura.fk_asignatura','=','asignatura.codigo')->
+        where('proyeccion.id_proyeccion','=',$proyeccion->id_proyeccion)->get();
     }
 
     /**
