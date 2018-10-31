@@ -17,7 +17,7 @@ class ProyeccionController extends Controller
     {
         $matricula = $request->input('matricula');
         $proyeccion =  DB::table('proyeccion')->where('proyeccion.fk_alumno','=',$matricula)->orderBy('proyeccion.f_creacion', 'asc')->first();
-        return DB::table('proyeccion')->select(DB::raw('proyeccion.f_creacion, proyeccion.es_editada, asignatura.codigo, asignatura.nombre, asignatura.nombre_corto, periodo.nombre'))->
+        return DB::table('proyeccion')->select(DB::raw('proyeccion.f_creacion, proyeccion.es_editada, asignatura.codigo, asignatura.nombre, asignatura.nombre_corto AS nombreAsignatura, periodo.nombre As nombrePeriodo, periodo.id_periodo AS idPeriodo'))->
         join('proyeccion_has_asignatura','proyeccion_has_asignatura.fk_proyeccion','=','proyeccion.id_proyeccion')->
         join('periodo','proyeccion_has_asignatura.fk_periodo','=','periodo.id_periodo')->
         join('asignatura','proyeccion_has_asignatura.fk_asignatura','=','asignatura.codigo')->
