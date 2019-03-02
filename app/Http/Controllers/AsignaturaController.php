@@ -16,7 +16,7 @@ class AsignaturaController extends Controller
     public function index(Request $request)
     {
         $matricula = $request->input('matricula');
-        if($matricula)
+        /*if($matricula)//
         {
             $mysqli=new mysqli('127.0.0.1','root','','spva');
 
@@ -63,7 +63,7 @@ class AsignaturaController extends Controller
             }
 
             return $datos;
-        }
+        }*/
         return Asignatura::all();
     }
 

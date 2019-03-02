@@ -196,7 +196,7 @@ class AlumnoController extends Controller
      * @param  Alumno $alumno
      * @return \Illuminate\Http\Response
      */
-    public function show(Alumno $alumno)
+    public function show(DatosAlumno $alumno)
     {
         return $alumno;
     }
