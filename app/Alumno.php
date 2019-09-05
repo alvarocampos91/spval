@@ -107,7 +107,8 @@ class Alumno extends Model
             $fechaEgreso = new DateTime($alumno->fechaIngreso);
             $fechaEgreso->setDate( intval( $fechaIngreso->format('Y') ) + $carrera->estadia, intval( $fechaIngreso->format('m') ), intval( $fechaIngreso->format('d') ) );
 
-            $fechaActual = new DateTime();
+            // $fechaActual = new DateTime();
+            $fechaActual = new DateTime("2018-11-01");
 
             $difAnios = intval($fechaEgreso->diff($fechaActual)->format('%a')) / 365.25;
             $creditosAcumulables = $CREDITOS_MAX_POR_ANIO * $difAnios;
